@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { useChatStore } from "@/store/useChatStore";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
-// import { getAIResponse } from "@/lib/dummyApi";
+import { getAIResponse } from "@/lib/dummyApi";
 import { X } from "lucide-react";
 
 interface ChatInterfaceProps {
@@ -32,8 +32,8 @@ export default function ChatInterface({ noteId }: ChatInterfaceProps) {
     // Simulate AI response
     setIsLoading(true);
     try {
-      //   const response = await getAIResponse(content);
-      //   addMessage(noteId, response, "ai");
+        const response = await getAIResponse(content);
+        addMessage(noteId, response, "ai");
     } catch (error) {
       console.error("Error fetching AI response:", error);
       addMessage(
