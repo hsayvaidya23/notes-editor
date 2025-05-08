@@ -1,48 +1,50 @@
 @import "tailwindcss";
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+
+@layer base {
+  * {
+    @apply box-border m-0 p-0;
+  }
+
+  body {
+    @apply bg-white text-black;
+  }
 }
 
-body {
-  @apply bg-white text-gray-900;
-}
+@layer components {
+  .ProseMirror {
+    @apply min-h-[300px] p-4 border-0 outline-none;
+  }
 
-/* TipTap Editor Styles */
-.ProseMirror {
-  @apply min-h-[300px] p-4 border-0 outline-none;
-}
+  .ProseMirror > * + * {
+    @apply mt-4;
+  }
 
-.ProseMirror > * + * {
-  @apply mt-4;
-}
+  .ProseMirror h1 {
+    @apply text-3xl font-bold;
+  }
 
-.ProseMirror h1 {
-  @apply text-3xl font-bold;
-}
+  .ProseMirror h2 {
+    @apply text-2xl font-bold;
+  }
 
-.ProseMirror h2 {
-  @apply text-2xl font-bold;
-}
+  .ProseMirror h3 {
+    @apply text-xl font-bold;
+  }
 
-.ProseMirror h3 {
-  @apply text-xl font-bold;
-}
+  .ProseMirror p {
+    @apply my-2;
+  }
 
-.ProseMirror p {
-  @apply my-2;
-}
+  .ProseMirror ul, .ProseMirror ol {
+    @apply pl-8;
+  }
 
-.ProseMirror ul, .ProseMirror ol {
-  @apply pl-8;
-}
+  .ProseMirror ul {
+    @apply list-disc;
+  }
 
-.ProseMirror ul {
-  @apply list-disc;
-}
-
-.ProseMirror ol {
-  @apply list-decimal;
+  .ProseMirror ol {
+    @apply list-decimal;
+  }
 }

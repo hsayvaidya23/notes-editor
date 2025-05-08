@@ -22,7 +22,7 @@ export default function NotesContainer() {
     );
   }
   
-  const isChatVisible = chatVisibility[activeNoteId] || false;
+  const isChatVisible = activeNoteId ? chatVisibility[activeNoteId] || false : false;
   
   return (
     <div className="flex flex-col h-full relative">
