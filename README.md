@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Notes App with AI Chat
 
-## Getting Started
+## Overview
 
-First, run the development server:
+I've created a Notion-style notes editor with an embedded AI chat interface using Next.js, TypeScript, and Tailwind CSS. The application allows users to create, edit, and manage notes with a rich text editor (TipTap) and includes an AI chat assistant that can be toggled for each note.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features Implemented
+
+### Notes System
+- Sidebar to view and switch between multiple notes
+- Each note has a title and rich text body
+- TipTap editor with support for:
+  - Text formatting (bold, italic)
+  - Headings (H1, H2, H3)
+  - Bullet lists
+  - Numbered lists
+
+### AI Chat UI
+- Circular AI button at the bottom-right of each note
+- Floating chat interface that appears at the bottom of the note
+- Chat window with:
+  - User message input
+  - Mock AI responses via dummy API
+  - Right-aligned user messages
+  - Left-aligned AI responses
+
+### State Management
+- Zustand for global state management
+- Note-specific chat history
+- Proper state handling for all UI components
+
+## Project Structure
+
+```
+notes-app/
+├── package.json               # NPM dependencies
+├── tsconfig.json              # TypeScript configuration
+├── next.config.js             # Next.js configuration
+├── tailwind.config.js         # Tailwind CSS configuration
+└── src/
+    ├── app/                   # Next.js app folder
+    │   ├── globals.css        # Global styles
+    │   ├── layout.tsx         # Root layout
+    │   └── page.tsx           # Root page component
+    ├── components/            # UI components
+    │   ├── Editor/            # TipTap editor components
+    │   ├── Notes/             # Notes management components
+    │   ├── Layout/            # Layout components
+    │   └── Chat/              # Chat UI components
+    ├── store/                 # Zustand stores
+    │   ├── useNotesStore.ts   # Notes state management
+    │   └── useChatStore.ts    # Chat state management
+    ├── types/                 # TypeScript type definitions
+    └── lib/                   # Utility functions
+        ├── dateUtils.ts       # Date formatting utilities
+        └── dummyApi.ts        # Mock AI API
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How It Works
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### State Management with Zustand
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application uses Zustand for state management, with two main stores:
 
-## Learn More
+1. **Notes Store** (`useNotesStore.ts`):
+   - Manages the list of notes
+   - Tracks the active note
+   - Handles note creation, updating, and deletion
 
-To learn more about Next.js, take a look at the following resources:
+2. **Chat Store** (`useChatStore.ts`):
+   - Manages chat histories for each note
+   - Controls chat visibility
+   - Handles adding messages and clearing chat history
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Rich Text Editing with TipTap
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The TipTap editor is integrated to provide rich text capabilities:
 
-## Deploy on Vercel
+- `Editor.tsx` sets up the TipTap editor with necessary extensions
+- `MenuBar.tsx` provides formatting controls and styling options
+- The editor content is stored in the notes store
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### AI Chat Interface
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The AI chat functionality:
+
+- Is toggled via a floating button at the bottom-right of each note
+- Uses a dummy API (`dummyApi.ts`) to simulate responses
+- Maintains separate chat histories for each note
+- Visually separates user and AI messages
+
+## Technical Implementation Details
+
+### Component Design
+
+- **Modular approach**: Each component has a single responsibility
+- **TypeScript interfaces**: All props and state are properly typed
+- **Responsive design**: The UI adapts to different screen sizes
+
+### Performance Considerations
+
+- State updates are optimized to avoid unnecessary renders
+- Chat histories are stored per note to prevent performance issues with large chat logs
+- TipTap editor is configured for efficient updates
+
+### User Experience Enhancements
+
+- Visual feedback for active states
+- Smooth transitions for showing/hiding the chat interface
+- Intuitive note navigation
+
+## How to Use
+
+1. **Creating Notes**:
+   - Click the + button in the sidebar to create a new note
+   - Give it a title by editing the title field
+
+2. **Editing Notes**:
+   - Use the TipTap toolbar to format text
+   - Create headings, lists, and apply text formatting
+   - Changes are automatically saved
+
+3. **Using the AI Chat**:
+   - Click the chat button at the bottom-right to toggle the chat interface
+   - Type a message and press Enter or click Send
+   - View the AI's response
+   - Chat history is preserved per note
+
+## Deployment
+
+To deploy this application:
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Run development server: `npm run dev`
+4. For production: `npm run build` followed by `npm run start`
+5. Alternatively, deploy to Vercel for automatic setup
+
+## Future Enhancements
+
+- Add more rich text features (images, code blocks, etc.)
+- Implement real-time collaborative editing
+- Add search functionality for notes
+- Integrate a real AI API instead of the dummy one
+- Add authentication and user accounts
+- Implement note organization with folders/tags
+
+This implementation satisfies all the requirements specified in the assignment, providing a clean, functional Notion-style editor with an embedded AI chat interface.
