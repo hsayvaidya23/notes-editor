@@ -1,6 +1,7 @@
 "use client"
 
 import { useNotesStore } from '@/store/useNotesStore' 
+import NotesList from '@/components/Notes/NotesList'
 import { Plus } from 'lucide-react'
 
 export default function Sidebar() {
@@ -19,7 +20,7 @@ export default function Sidebar() {
         </button>
       </div>
       <div className="flex-1 overflow-y-auto">
-        {/* <NotesList /> */}
+        <NotesList />
       </div>
     </div>
   )
